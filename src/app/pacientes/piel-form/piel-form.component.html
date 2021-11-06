@@ -1,0 +1,57 @@
+<form [formGroup]="piel">
+    <ng-template matStepLabel>Caracterización de la Piel</ng-template>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <div fxLayout="column">
+            <h1>Caracterización de la piel</h1>
+
+            <div class="spaced-block">
+                <mat-label class="radio-group-label" style="display: block;">Color de la piel</mat-label>
+                <mat-radio-group formControlName="color">
+                    <mat-radio-button *ngFor="let option of opcionesColorPiel" [value]="option">
+                        {{ option }}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+            
+            <div class="spaced-block">
+                <mat-label class="radio-group-label" style="display: block;">Grosor de la piel</mat-label>
+                <mat-radio-group formControlName="grosor">
+                    <mat-radio-button *ngFor="let option of opcionesGrosorPiel" [value]="option">
+                        {{ option }}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+            
+            <mat-form-field appearance="outline">
+                <mat-label>Enfermedades de la piel</mat-label>
+                <mat-chip-list #selectedEnfermedades>
+                  <mat-chip
+                    *ngFor="let e of selectedEnfermedadesPiel"
+                    [selectable]="true"
+                    [removable]="true"
+                    (removed)="remove(e)">
+                    {{e}}
+                    <button matChipRemove>
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip>
+                  <input
+                    placeholder="Enfermedad..."
+                    #enfermedadInput
+                    formControlName="enfermedades"
+                    [matAutocomplete]="autoEnfermedades"
+                    [matChipInputFor]="selectedEnfermedades"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-autocomplete #autoEnfermedades="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let e of filteredOpcionesEnfermedad | async" [value]="e">
+                    {{e}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+        </div>
+        
+    </div>
+</form>

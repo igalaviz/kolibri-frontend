@@ -1,0 +1,79 @@
+<form [formGroup]="datosPersonales">
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <div fxLayout="column" >
+
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input formControlName="nombre" matInput required>
+                <mat-error *ngIf="datosPersonales.get('nombre')?.hasError('required')">
+                    Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" matInput required type="email" >
+                <mat-error *ngIf="datosPersonales.get('email')?.hasError('email') && !datosPersonales.get('email')?.hasError('required')">
+                    Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="datosPersonales.get('email')?.hasError('required')">
+                    Email is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            
+
+            <mat-form-field appearance="outline">
+                <mat-label>Fecha de nacimiento</mat-label>
+                <input formControlName="fechaNacimiento" matInput required type="date">
+            </mat-form-field>
+            <div style="margin-bottom: 16px;">
+                <mat-label style="display: block;">Sexo</mat-label>
+                <mat-radio-group formControlName="sexo">
+                    <mat-radio-button value="f">Femenino</mat-radio-button>
+                    <mat-radio-button value="m">Masculino</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="center">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Celular</mat-label>
+                    <input formControlName="celular" matInput required type="tel">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Teléfono fijo</mat-label>
+                    <input formControlName="telefonoFijo" matInput required type="tel">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutGap="16px" style="margin-bottom: 16px;">
+                <div fxFlex>
+                    <mat-label style="display: block;">Deportista?</mat-label>
+                    <mat-radio-group formControlName="deportista">
+                    <mat-radio-button [value]="true">Sí</mat-radio-button>
+                    <mat-radio-button [value]="false">No</mat-radio-button>
+                </mat-radio-group>
+                </div>
+                <div fxFlex>
+                    <mat-label style="display: block;">Fumador?</mat-label>
+                    <mat-radio-group formControlName="fumador">
+                        <mat-radio-button [value]="true">Sí</mat-radio-button>
+                        <mat-radio-button [value]="false">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>   
+            </div>
+
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOpcionesMotivacion | async" [value]="option">
+                  {{option}}
+                </mat-option>
+            </mat-autocomplete>
+            <mat-form-field appearance="outline">
+                <mat-label>Motivación para iniciar el tratamiento</mat-label>
+                <input type="text"
+                placeholder="Pick one"
+                matInput
+                formControlName="motivacion"
+                [matAutocomplete]="auto">
+            </mat-form-field>
+                
+        </div>
+    </div>
+</form>

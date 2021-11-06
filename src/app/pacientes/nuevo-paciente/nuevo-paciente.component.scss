@@ -1,0 +1,18 @@
+.mat-form-field ~ .mat-form-field {
+    margin-bottom: 8px;
+}
+
+.bottomBar {
+    margin-top: 16px;
+    background-color: white;
+    padding: 16px;
+    box-shadow: -1px -9px 15px -9px rgba(0,0,0,0.31);
+    -webkit-box-shadow: -1px -9px 15px -9px rgba(0,0,0,0.31);
+    -moz-box-shadow: -1px -9px 15px -9px rgba(0,0,0,0.31);
+    
+}
+
+.mat-expansion-panel-header-title {
+    font-weight: bold;
+    font-size: 1.2em;
+}

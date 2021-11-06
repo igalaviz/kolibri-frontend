@@ -1,0 +1,55 @@
+<mat-stepper #stepper linear="true" [orientation]="(stepperOrientation | async)!">
+    <mat-step label="Datos personales">
+        <app-datos-personales-form #datosPersonales></app-datos-personales-form>
+        <div *ngIf="showBottomBar | async; else noBottomBar"  fxLayout.gt-sm="row" fxLayoutAlign="space-around end">
+            <div fxFlex="50%" >
+                <button mat-button (click)="goBack()" type="button" 
+                [disabled]="stepper.selectedIndex === 0">Back</button>
+                
+            </div>
+            <div fxFlex="50%" style="text-align: end;">
+                <button mat-raised-button color="primary" (click)="goForward(1)" type="button" 
+                    [disabled]="stepper.selectedIndex === stepper.steps.length-1">Next</button>
+            </div>
+            
+        </div>
+        <ng-template #noBottomBar>
+            <div  style="text-align: end; margin-top: 16px;" fxLayout.st-sm>
+                <button mat-button (click)="goBack()" type="button" 
+                    [disabled]="stepper.selectedIndex === 0">Back</button>
+                <button mat-raised-button color="primary" (click)="goForward(1)" type="button" 
+                        [disabled]="stepper.selectedIndex === stepper.steps.length-1">Next</button>
+            </div>
+        </ng-template>
+        
+    </mat-step>
+
+    <mat-step label="Antecedentes patológicos y tratamientos previos">
+    </mat-step>
+
+
+    <mat-step label="Caracterización de la piel">
+            <app-piel-form #piel></app-piel-form>
+
+                <div *ngIf="showBottomBar | async; else noBottomBar"  fxLayout.gt-sm="row" fxLayoutAlign="space-around end">
+                    <div fxFlex="50%" >
+                        <button mat-button (click)="goBack()" type="button" 
+                        [disabled]="stepper.selectedIndex === 0">Back</button>
+                        
+                    </div>
+                    <div fxFlex="50%" style="text-align: end;">
+                        <button mat-raised-button color="primary" (click)="goForward(2)" type="button" 
+                            [disabled]="stepper.selectedIndex === stepper.steps.length-1">Next</button>
+                    </div>
+                    
+                </div>
+                <ng-template #noBottomBar>
+                    <div  style="text-align: end; margin-top: 16px;" fxLayout.st-sm>
+                        <button mat-button (click)="goBack()" type="button" 
+                            [disabled]="stepper.selectedIndex === 0">Back</button>
+                        <button mat-raised-button color="primary" (click)="goForward(2)" type="button" 
+                                [disabled]="stepper.selectedIndex === stepper.steps.length-1">Next</button>
+                    </div>
+                </ng-template>
+    </mat-step>
+</mat-stepper>
